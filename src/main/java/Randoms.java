@@ -2,17 +2,34 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 public class Randoms implements Iterable<Integer> {
+
     protected Random random;
 
     public Randoms(int min, int max) {
-        //...
+       this.random = new Random();
+       random.ints(min,max+1);
     }
 
     @Override
     public Iterator<Integer> iterator() {
-        return null;
+        return new Iterator<Integer>() {
+            int next = 0;
+            boolean isRandom = true;
+            @Override
+            public boolean hasNext() {
+
+                return true;
+            }
+
+            @Override
+            public Integer next() {
+                int result = 0;
+                return result;
+            }
+        };
     }
 
     @Override
