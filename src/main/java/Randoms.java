@@ -7,29 +7,35 @@ import java.util.stream.IntStream;
 public class Randoms implements Iterable<Integer> {
 
     protected Random random;
+    static IntStream intStream;
 
     public Randoms(int min, int max) {
-       this.random = new Random();
-       random.ints(min,max+1);
+        this.random = new Random();
+        intStream = random.ints(min,max + 1);
     }
 
     @Override
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
-            int next = 0;
             boolean isRandom = true;
+
             @Override
             public boolean hasNext() {
-
                 return true;
             }
 
             @Override
             public Integer next() {
-                int result = 0;
-                return result;
+                int res = intStream.findFirst().getAsInt();
+                return res;
             }
         };
+    }
+
+
+    public static int rnd(int min, int max) {
+        max -= min;
+        return (int) (Math.random() * ++max) + min;
     }
 
     @Override
@@ -41,8 +47,6 @@ public class Randoms implements Iterable<Integer> {
     public Spliterator<Integer> spliterator() {
         return Iterable.super.spliterator();
     }
-
-    //...
 }
 
 
